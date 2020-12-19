@@ -10,5 +10,6 @@ COPY srcs/nginx-local /tmp
 COPY srcs/index.html /tmp
 COPY srcs/index.php /tmp
 COPY srcs/database.txt /tmp
+COPY srcs/wp-config.php /tmp
 EXPOSE 80
 EXPOSE 443

@@ -7,18 +7,17 @@ RUN apt-get -y install mariadb-server
 
 WORKDIR /var/www/localhost
 WORKDIR /tmp/mkcert
+WORKDIR /tmp
+
 COPY srcs/init_container.sh /tmp
-
 COPY srcs/nginx-local /etc/nginx/sites-enabled/nginx-local
-RUN rm -f /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
-RUN ln -s /etc/nginx/sites-enabled/nginx-local /etc/nginx/sites-available/nginx-local
-
-RUN wget -P /tmp  https://wordpress.org/latest.tar.gz 
-RUN wget -P /tmp https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-languages.tar.gz
-RUN wget -P /tmp/mkcert https://github.com/FiloSottile/mkcert/releases/download/v1.1.2/mkcert-v1.1.2-linux-amd64
-
 COPY srcs/wordpress.sql /tmp
 COPY srcs/wp-config.php /tmp 
-COPY srcs/database /tmp 
+COPY srcs/database /tmp
 
-WORKDIR /tmp
+RUN rm -f /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
+RUN ln -s /etc/nginx/sites-enabled/nginx-local /etc/nginx/sites-available/nginx-local
+RUN wget -c https://wordpress.org/latest.tar.gz 
+RUN wget -c https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-languages.tar.gz
+RUN wget -c -P /tmp/mkcert https://github.com/FiloSottile/mkcert/releases/download/v1.1.2/mkcert-v1.1.2-linux-amd64
+

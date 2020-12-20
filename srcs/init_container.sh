@@ -1,13 +1,13 @@
 #!/bin/sh
 
 
-nginx_setup()
+nginx_user_access()
 {
 	chown -R www-data /var/www/*
 	chmod -R 755 /var/www/*
 }
 
-ssl_setup()
+ssl_generate()
 {
 	cd /tmp/mkcert
 	mv mkcert-v1.1.2-linux-amd64 mkcert
@@ -17,7 +17,7 @@ ssl_setup()
 	cd /tmp
 }
 
-mysql_setup()
+database_setup()
 {
 	mysql -u root --skip-password < /tmp/database
 	mysql wordpress -u root < /tmp/wordpress.sql
@@ -43,17 +43,12 @@ cd /tmp
 
 service mysql start
 
-ssl_setup
-mysql_setup
+ssl_generate
+database_setup
 wordpress_setup
 phpmyadmin_setup
-nginx_setup
+nginx_user_access
 
 
 service nginx start
 service php7.3-fpm start
-
-
-
-
-

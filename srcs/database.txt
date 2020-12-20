@@ -1,3 +1,0 @@
-CREATE DATABASE mbeaujar;
-GRANT ALL ON mbeaujar.* TO 'www-data'@'localhost' IDENTIFIED BY 'mbeaujar' WITH GRANT OPTION;
-FLUSH PRIVILEGES;

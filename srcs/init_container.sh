@@ -41,6 +41,8 @@ phpmyadmin_setup()
 
 cd /tmp
 
+# if autoindex is off
+#mv /var/www/html/index.nginx-debian.html /var/www/localhost/index.nginx-debian.html
 service mysql start
 
 ssl_generate
